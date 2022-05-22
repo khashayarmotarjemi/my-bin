@@ -1,0 +1,5 @@
+#!/bin/bash
+
+current=$(cat /sys/class/backlight/intel_backlight/brightness)
+new=$(expr $current + 5000)
+echo $new > /sys/class/backlight/intel_backlight/brightness

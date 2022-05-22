@@ -1,0 +1,21 @@
+#!/bin/bash
+
+names=$(ls ~/Screenshots )
+
+
+lastNumber=1
+for word in $names 
+  do
+    number=${word%%.*}
+    if [ ${number} -gt ${lastNumber} ]; then
+      lastNumber=$number
+    fi
+  done
+
+
+((lastNumber=lastNumber+1))
+
+maim -s ~/Screenshots/tmp.jpg
+
+mv ~/Screenshots/last.jpg ~/Screenshots/$lastNumber.jpg
+mv ~/Screenshots/tmp.jpg ~/Screenshots/last.jpg

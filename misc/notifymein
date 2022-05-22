@@ -1,0 +1,19 @@
+#!/bin/bash
+
+sleep $1
+
+msg=''
+
+for arg; do
+
+	if [ "$arg" = "$1" ]; then
+		sleep $1		
+	else
+		msg+=" $arg"
+	fi
+	
+done
+
+notify-send "$msg"
+
+
