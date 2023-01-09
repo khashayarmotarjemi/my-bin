@@ -1,0 +1,6 @@
+#!/bin/bash
+
+name=$(date +%F).zip
+echo $name
+zip --password "password" $name ~/Desktop/as/*
+

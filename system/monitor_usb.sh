@@ -11,8 +11,8 @@ def main():
 
     for device in iter(monitor.poll, None):
         # I can add more logic here, to run different scripts for different devices.
-        #subprocess.call(['/home/foo/foobar.sh', '--foo', '--bar'])
-        print("changed")
-
+        subprocess.call('reload_jack.sh')
+        #print("changed")
+       
 if __name__ == '__main__':
     main()

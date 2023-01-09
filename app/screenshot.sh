@@ -1,9 +1,10 @@
 #!/bin/bash
 
-$name=date +%s
-$folder="screenshots"
-$format="jpg"
+name=$(date +%s)
+folder="screenshots"
+format="jpg"
 
-xfce4-screenshooter -r -s /home/khashayar/Readings/NOTES/$folder/$name.$format
-echo -n <img>$folder/$name.$format</img> | xclip -selection clipboard
+full_path=/home/khashayar/Readings/NOTES/$folder/$name.$format
 
+xfce4-screenshooter -r -s $full_path
+xclip -selection clipboard -t image/jpg -i $full_path
