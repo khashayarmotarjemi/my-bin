@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Define the location of the config file that stores paths
+CONFIG_FILE="$HOME/.config/config_list.txt"
+
+# Function to show error
+error() {
+    echo "Error: $1"
+    exit 1
+}
+
+# Check command line parameters
+if [ "$1" = "-add" ]; then
+    if [ -z "$2" ] || [ -z "$3" ]; then
+        error "Usage: config -add [name] [path]"
+    fi
+
+    # Check if the provided file path exists
+    if [ ! -f "$3" ]; then
+        error "The provided file path '$3' does not exist."
+    fi
+
+    # Add or update the name-path pair to the config file
+    sed -i "/^$2:/d" "$CONFIG_FILE" 2>/dev/null
+    echo "$2:$3" >> "$CONFIG_FILE"
+    echo "Path '$3' has been added with the name '$2'."
+else
+    # Get the name from the command line
+    NAME="$1"
+
+    if [ -z "$NAME" ]; then
+        error "Usage: config [name]"
+    fi
+
+    # Ensure the config file exists
+    if [ ! -f "$CONFIG_FILE" ]; then
+        error "No paths have been added yet."
+    fi
+
+    # Find the path associated with the name
+    PATH_TO_OPEN=$(grep "^$NAME:" "$CONFIG_FILE" | cut -d':' -f2-)
+
+    if [ -z "$PATH_TO_OPEN" ]; then
+        error "No path found with the name '$NAME'."
+    fi
+
+    # Open the file with vim
+    vim "$PATH_TO_OPEN"
+fi
+

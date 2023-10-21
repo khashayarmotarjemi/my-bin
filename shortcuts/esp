@@ -1,0 +1,3 @@
+#!/bin/bash
+
+vim ~/.config/espanso/match/symbols.yml
